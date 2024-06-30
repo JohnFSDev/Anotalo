@@ -1,0 +1,51 @@
+/* Estilo para la nota principal */
+.card-body {
+    height: calc(100% - 120px); /* Ajustar la altura de la nota principal */
+    overflow-y: auto; /* Agregar scroll si la nota es muy larga */
+  }
+  
+  .card-body textarea {
+    height: calc(100% - 20px); /* Ajustar la altura del textarea */
+  }
+  
+  .card-footer {
+    height: 60px; /* Altura del footer donde está el botón enviar */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Estilo para la nota principal grande */
+.note-card-large {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: all 0.3s ease; /* Animación de transición */
+  height: 100%; /* Ajusta la altura según sea necesario */
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card-large .card-header {
+  background-color: #007bff; /* Color de fondo del encabezado */
+  color: #fff; /* Color del texto del encabezado */
+}
+
+.note-card-large .card-body {
+  background-color: #fff; /* Color de fondo del cuerpo */
+  color: #333; /* Color del texto del cuerpo */
+  flex: 1; /* Ocupa todo el espacio disponible */
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card-large .card-body textarea {
+  flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+.note-card-large .card-body button {
+  width: 100%; /* Ocupa todo el ancho */
+  max-width: 200px; /* Ancho máximo */
+  align-self: flex-end; /* Alinea el botón al final del contenedor */
+}
