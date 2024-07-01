@@ -5,6 +5,7 @@ import { NotasComponent } from './notas/notas.component';
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'Notas', component: NotasComponent },
+  { path: 'notas', component: NotasComponent },
+  { path: 'sections', component: NotasComponent }
 
 ];

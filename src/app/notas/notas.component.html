@@ -28,15 +28,13 @@
               <div class="card-header bg-warning d-flex justify-content-between align-items-center">
                   <h6 class="mb-0 text-dark" (click)="seleccionarNota(n.tituloNota, n.descripcionNota)">{{n.tituloNota}}</h6>
                   <div class="dropdown">
-                      <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">
+                      <button class="btn btn-light" type="button" data-toggle="dropdown">
                           <i class="fas fa-bars"></i>
                       </button>
                       <div class="dropdown-menu">
                           <button class="dropdown-item text-danger" type="button" (click)="openModalEliminar()">Eliminar</button>
-                          <div *ngFor="let s of listaSecciones" class="dropdown-item" (click)="openModalAgregar()">Agregar</div>
                           <div class="dropdown-divider"></div>
-                          <button class="dropdown-item" type="button">Enviar correo</button>
-                          <button class="dropdown-item" type="button">Agregar DOC</button>
+                      <div class="dropdown-item" (click)="openModalAgregar()">Agregar a Seccion</div>
                       </div>
                   </div>
               </div>
