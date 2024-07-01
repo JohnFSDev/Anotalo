@@ -5,6 +5,7 @@ import Anotalo_API.Anotalo.Repository.NotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotesServiceImpl implements NotesService {
@@ -18,8 +19,8 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public List<Note> searchNotesByText(Long idUser, String searchText) {
-        return noteRepository.findByUserIdAndContentContaining(idUser, searchText);
+    public List<Note> SearchUserNotesByText(Long idUser, String text) {
+        return noteRepository.SearchUserNotesByText(idUser, text);
     }
 
     @Override
@@ -28,12 +29,17 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public void updateNote(Note note) {
-        noteRepository.save(note);
+    public Note updateNote(Note note) {
+        return noteRepository.save(note);
     }
 
     @Override
     public void deleteNote(Long id) {
         noteRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Note> findById(Long id) {
+        return noteRepository.findById(id);
     }
 }

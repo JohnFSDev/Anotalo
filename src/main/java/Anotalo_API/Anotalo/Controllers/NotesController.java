@@ -43,26 +43,30 @@ public class NotesController {
         if (userId == null || searchText == null || searchText.isEmpty()) {
             return ResponseEntity.badRequest().build(); // 400 Bad Request
         }
-        List<Note> notes = notesService.searchNotesByText(userId, searchText);
+        List<Note> notes = notesService.SearchUserNotesByText(userId, searchText);
         return ResponseEntity.ok(notes); // 200 OK
     }
 
     @PostMapping("/create")
     public ResponseEntity<Note> createNote(@RequestBody Note note) {
         if (note == null || note.getTitle() == null || note.getTitle().isEmpty()) {
-            return ResponseEntity.badRequest().build(); // 400 Bad Request
+            return ResponseEntity.badRequest().build(); // 400 Bad Request.
         }
         Note createdNote = notesService.createNote(note);
-        return ResponseEntity.ok(createdNote); // 200 OK (with created note)
+        return ResponseEntity.ok(createdNote); // 200 OK.
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Void> updateNote(@RequestBody Note note) {
+    public ResponseEntity<Note> updateNote(@RequestBody Note note) {
         if (note == null || note.getId() == null || note.getTitle() == null || note.getTitle().isEmpty()) {
             return ResponseEntity.badRequest().build(); // 400 Bad Request
         }
-        notesService.updateNote(note);
-        return ResponseEntity.noContent().build(); // 204 No Content
+        Note updatedNote = notesService.updateNote(note); // Actualiza la nota en la base de datos
+        if (updatedNote != null) {
+            return ResponseEntity.ok(updatedNote); // Devuelve la nota actualizada con el estado 200 OK
+        } else {
+            return ResponseEntity.notFound().build(); // Si no se pudo actualizar la nota, devuelve 404 Not Found
+        }
     }
 
     @DeleteMapping("/delete/{id}")
