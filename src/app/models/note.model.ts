@@ -6,5 +6,5 @@ export interface Note {
     content: string;
     createdAt?: Date;
     updatedAt?: Date;
-    user: User; 
+    user?: User; 
 }

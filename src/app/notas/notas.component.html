@@ -24,24 +24,25 @@
           </div>
 
           <!-- Lista de notas -->
-          <div *ngFor="let n of listaNotas" class="card mb-3 shadow-sm note-card">
+          <div *ngFor="let n of Notes" class="card mb-3 shadow-sm note-card">
               <div class="card-header bg-warning d-flex justify-content-between align-items-center">
-                  <h6 class="mb-0 text-dark" (click)="seleccionarNota(n.tituloNota, n.descripcionNota)">{{n.tituloNota}}</h6>
+                  <h6 class="mb-0 text-dark">{{n.title}}</h6>
                   <div class="dropdown">
-                      <button class="btn btn-light" type="button" data-toggle="dropdown">
+                      <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">
                           <i class="fas fa-bars"></i>
                       </button>
                       <div class="dropdown-menu">
-                          <button class="dropdown-item text-danger" type="button" (click)="openModalEliminar()">Eliminar</button>
+                          <button class="dropdown-item text-danger" type="button" (click)="openModalEliminar(n.id!)">Eliminar</button>
                           <div class="dropdown-divider"></div>
-                      <div class="dropdown-item" (click)="openModalAgregar()">Agregar a Seccion</div>
+                      <div class="dropdown-item" (click)="openModalAgregar()" >Agregar</div>
+
                       </div>
                   </div>
               </div>
               <div class="card-body bg-light">
-                  <p class="card-text text-dark">{{ n.descripcionNota.length > 150 ? n.descripcionNota.substring(0, 150) + '...' : n.descripcionNota }}</p>
+                  <p class="card-text text-dark">{{ n.content.length > 150 ? n.content.substring(0, 150) + '...' : n.content }}</p>
               </div>
-              <div class="card-footer text-muted">Última modificación: {{n.fechaModificacion}}</div>
+              <div class="card-footer text-muted">Última modificación: {{n.updatedAt | date}} </div>
           </div>
       </div>
 
@@ -50,11 +51,11 @@
     <div class="card mb-4 h-100 shadow-sm note-card-large">
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">
-                <input class="form-control-plaintext text-white" [(ngModel)]="tituloNotaSeleccionada" placeholder="Título de la nota">
+                <input class="form-control-plaintext text-white" [(ngModel)]="selectedNote.title" placeholder="Título de la nota">
             </h5>
         </div>
         <div class="card-body">
-            <textarea class="form-control" [(ngModel)]="descripcionNotaSeleccionada" style="height: calc(100% - 60px); resize: none;" placeholder="Descripción de la nota"></textarea>
+            <textarea class="form-control" [(ngModel)]="selectedNote.content" style="height: calc(100% - 60px); resize: none;" placeholder="Descripción de la nota"></textarea>
             <button type="button" class="btn btn-primary btn-block mt-3" mdbRipple>Enviar</button>
         </div>
     </div>
