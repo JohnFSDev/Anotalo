@@ -1,14 +1,12 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-alpine
-
-# Set the working directory inside the container
+# Primera etapa: Construcción de la aplicación con Maven
+FROM maven:3.8.1-openjdk-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Añadimos la aplicación al contenedor.
-COPY target/Anotalo-0.0.1-SNAPSHOT.jar Anotalo.jar
-
-# ENV PORT = 8089.
+# Segunda etapa: Ejecución de la aplicación en Eclipse Temurin JRE
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8089
-
-# Corremos el Jar File.
-ENTRYPOINT ["java", "-jar", "Anotalo.jar"]
+ENTRYPOINT java -jar app.jar
